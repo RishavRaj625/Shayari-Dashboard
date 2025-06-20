@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shayari Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Canvas for cursor effects -->
+    <canvas id="cursorCanvas"></canvas>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">✨ Shayari Notes</h1>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="add-btn" id="addShayariBtn">
+                    + Add Shayari
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Stats Section -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCount">0</div>
+                    <div class="stat-label">Total Shayaris</div>
+                </div>
+                <!-- <div class="stat-card">
+                    <div class="stat-number" id="loveCount">0</div>
+                    <div class="stat-label">Love</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="sadCount">0</div>
+                    <div class="stat-label">Sad</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="motivationalCount">0</div>
+                    <div class="stat-label">Motivational</div>
+                </div> -->
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="love">Love</button>
+                    <button class="filter-btn" data-filter="sad">Sad</button>
+                    <button class="filter-btn" data-filter="motivational">Motivational</button>
+                    <button class="filter-btn" data-filter="friendship">Friendship</button>
+                    <button class="filter-btn" data-filter="Notes">Notes</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search shayaris...">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+
+            <!-- Shayari Grid -->
+            <div class="shayari-grid" id="shayariGrid">
+                <!-- Shayari cards will be dynamically added here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">📝</div>
+                <h3>No Shayaris Yet</h3>
+                <p>Start by adding your first beautiful shayari</p>
+                <button class="add-btn" onclick="openModal()">Add Your First Shayari</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Add/Edit Shayari -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Shayari</h2>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="shayariForm">
+                    <div class="form-group">
+                        <label for="shayariTitle">Title</label>
+                        <input type="text" id="shayariTitle" placeholder="Enter shayari title..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="shayariContent">Shayari</label>
+                        <textarea id="shayariContent" placeholder="Write your beautiful shayari here..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="shayariCategory">Category</label>
+                        <select id="shayariCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="love">Love</option>
+                            <option value="sad">Sad</option>
+                            <option value="motivational">Motivational</option>
+                            <option value="friendship">Friendship</option>
+                            <option value="Notes">Notes</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="shayariAuthor">Author (Optional)</label>
+                        <input type="text" id="shayariAuthor" placeholder="Author name...">
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="save-btn">Save Shayari</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" id="contextMenu">
+        <div class="context-item" onclick="editShayari()">
+            <span class="context-icon">✏️</span>
+            Edit
+        </div>
+        <div class="context-item" onclick="duplicateShayari()">
+            <span class="context-icon">📋</span>
+            Duplicate
+        </div>
+        <div class="context-item danger" onclick="deleteShayari()">
+            <span class="context-icon">🗑️</span>
+            Delete
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
